@@ -53,7 +53,7 @@ const CONFIG = {
 const FAMILIAS = [
   { slug: "amaderada", nombre: "Amaderadas", descripcion: "Cálidas y elegantes: cedro, sándalo, vetiver." },
   { slug: "oriental", nombre: "Orientales", descripcion: "Intensas y envolventes: ámbar, oud, especias." },
-  { slug: "dulce", nombre: "Dulces", descripcion: "Golosas: vainilla, caramelo, frutos." },
+  { slug: "dulce", nombre: "Dulces", descripcion: "Gourmand: vainilla, caramelo, frutos." },
   { slug: "citrica", nombre: "Cítricas y frescas", descripcion: "Livianas y limpias, ideales para el calor." },
   { slug: "aromatica", nombre: "Aromáticas", descripcion: "Hierbas y lavanda, frescura con carácter." },
   { slug: "floral", nombre: "Florales", descripcion: "Rosa, jazmín y flores blancas." },

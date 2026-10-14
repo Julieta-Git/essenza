@@ -378,7 +378,7 @@
   function preguntasQuiz() {
     return [
       { clave: "genero", titulo: "¿Para quién es?", opciones: [
-        { valor: "hombre", texto: "Para hombre" }, { valor: "mujer", texto: "Para mujer" }, { valor: "", texto: "Me da igual" }] },
+        { valor: "hombre", texto: "Para hombre" }, { valor: "mujer", texto: "Para mujer" }, { valor: "unisex", texto: "Unisex" }] },
       { clave: "temporada", titulo: "¿Cuándo lo vas a usar más?", opciones: [
         { valor: "verano", texto: "Con calor" }, { valor: "invierno", texto: "Con frío o de noche" }, { valor: "todo-el-anio", texto: "Todo el año" }] },
       { clave: "familia", titulo: "¿Qué aroma te atrae?", opciones: [
@@ -389,7 +389,10 @@
 
   function puntaje(p) {
     let total = 0;
-    if (respuestas.genero) {
+    if (respuestas.genero === "unisex") {
+      // Unisex suma a los unisex sin descartar el resto.
+      if (p.genero === "unisex") total += 3;
+    } else if (respuestas.genero) {
       if (p.genero === respuestas.genero) total += 3;
       else if (p.genero === "unisex") total += p.tiraA === respuestas.genero ? 2.5 : 2;
       else total -= 10;
@@ -408,7 +411,7 @@
     const preguntas = preguntasQuiz();
     if (paso >= preguntas.length) return renderRecomendados();
     const q = preguntas[paso];
-    cont.replaceChildren(
+    cont.replaceChildren(...[
       el("div", { class: "quiz__progreso", "aria-hidden": "true" }, preguntas.map((_, i) => el("span", { class: i <= paso ? "hecho" : "" }))),
       el("p", { class: "quiz__paso", text: `Pregunta ${paso + 1} de ${preguntas.length}` }),
       el("h3", { class: "quiz__titulo", text: q.titulo }),
@@ -417,7 +420,7 @@
         onclick: () => { respuestas[q.clave] = o.valor; renderQuiz(paso + 1); },
       }, [el("span", { text: o.texto }), o.ayuda ? el("small", { text: o.ayuda }) : null]))),
       paso > 0 ? el("button", { class: "quiz__volver", type: "button", onclick: () => renderQuiz(paso - 1) }, document.createTextNode("Volver")) : null,
-    );
+    ].filter(Boolean));
     if (paso > 0) cont.querySelector(".quiz__opcion").focus({ preventScroll: true });
   }
 
@@ -430,13 +433,13 @@
       .slice(0, 3)
       .map((x) => x.p);
     const motivo = [
-      respuestas.genero && `para ${nombreDe(GENEROS, respuestas.genero).toLowerCase()}`,
+      respuestas.genero && (respuestas.genero === "unisex" ? "unisex" : `para ${nombreDe(GENEROS, respuestas.genero).toLowerCase()}`),
       respuestas.temporada && { verano: "para el calor", invierno: "para el frío", "todo-el-anio": "para todo el año" }[respuestas.temporada],
       respuestas.familia && nombreDe(FAMILIAS, respuestas.familia).toLowerCase(),
     ].filter(Boolean).join(", ");
     const nombres = lista.map((p) => p.nombre).join(", ");
     const grilla = el("div", { class: "grid quiz__grid" }, lista.map(crearCard));
-    $("#quiz").replaceChildren(
+    $("#quiz").replaceChildren(...[
       el("h3", { class: "quiz__titulo", text: lista.length === 1 ? "Te recomendamos este" : "Te recomendamos estos" }),
       motivo ? el("p", { class: "quiz__motivo", text: `Elegidos por: ${motivo}.` }) : null,
       grilla,
@@ -444,7 +447,7 @@
         el("a", { class: "btn", href: urlWhatsapp(`Hola, el sitio me recomendó: ${nombres}. ¿Me asesorás?`), target: "_blank", rel: "noopener" }, document.createTextNode("Consultar por estos")),
         el("button", { class: "btn btn--ghost", type: "button", onclick: () => { Object.keys(respuestas).forEach((k) => delete respuestas[k]); renderQuiz(0); } }, document.createTextNode("Empezar de nuevo")),
       ]),
-    );
+    ].filter(Boolean));
     animarCards(grilla);
     $("#quiz").scrollIntoView({ block: "start" });
   }
