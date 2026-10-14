@@ -87,11 +87,6 @@
     document.querySelectorAll(".js-ig").forEach((a) => { a.href = CONFIG.instagram; });
     document.querySelectorAll(".js-direccion").forEach((n) => { n.textContent = CONFIG.direccion; });
     document.querySelectorAll(".js-horario").forEach((n) => { n.textContent = CONFIG.horario; });
-    if (CONFIG.preciosActualizados) {
-      const p = $("#precios-fecha");
-      p.textContent = `Precios actualizados al ${CONFIG.preciosActualizados}. Precio en efectivo o transferencia; consultá por cuotas.`;
-      p.hidden = false;
-    }
   }
 
   /* ---------- familias ---------- */
@@ -125,24 +120,21 @@
 
   /* ---------- filtros ---------- */
 
-  function renderChips(id, clave, opciones) {
-    const cont = $(id);
-    // Un filtro con menos de dos opciones no sirve: se oculta el grupo.
-    cont.closest(".filtros__grupo").hidden = opciones.length < 2;
-    const todas = [{ slug: "", nombre: "Todas" }, ...opciones];
-    cont.replaceChildren(
-      ...todas.map((o) => el("button", {
-        class: "chip", type: "button",
-        "aria-pressed": String(filtros[clave] === o.slug),
-        onclick: () => setFiltro(clave, o.slug),
-      }, document.createTextNode(o.slug === "" && clave === "genero" ? "Todos" : o.nombre)))
-    );
+  function renderSelect(id, clave, opciones) {
+    const select = $(id);
+    // Un filtro con menos de dos opciones no sirve: se oculta.
+    select.closest(".filtros__grupo").hidden = opciones.length < 2;
+    const todas = [{ slug: "", nombre: clave === "genero" ? "Todos" : "Todas" }, ...opciones];
+    select.replaceChildren(...todas.map((o) => el("option", { value: o.slug, text: o.nombre })));
+    select.value = filtros[clave];
+    select.classList.toggle("filtro--activo", filtros[clave] !== "");
+    select.onchange = () => setFiltro(clave, select.value);
   }
 
   function renderFiltros() {
-    renderChips("#filtro-familia", "familia", familiasConStock());
-    renderChips("#filtro-genero", "genero", GENEROS.filter((g) => CATALOGO.some((p) => p.genero === g.slug)));
-    renderChips("#filtro-temporada", "temporada", TEMPORADAS.filter((t) => CATALOGO.some((p) => p.temporada === t.slug)));
+    renderSelect("#filtro-familia", "familia", familiasConStock());
+    renderSelect("#filtro-genero", "genero", GENEROS.filter((g) => CATALOGO.some((p) => p.genero === g.slug)));
+    renderSelect("#filtro-temporada", "temporada", TEMPORADAS.filter((t) => CATALOGO.some((p) => p.temporada === t.slug)));
   }
 
   function setFiltro(clave, valor) {
@@ -160,10 +152,17 @@
     entradas.forEach((e) => {
       if (!e.isIntersecting) return;
       const card = e.target;
-      card.classList.add("card--visible");
       observador.unobserve(card);
-      // Al terminar se saca el retraso para que el toque y el hover respondan al instante.
-      setTimeout(() => card.classList.remove("card--revela"), 1600);
+      // Se espera a que la foto esté cargada (hasta 1,5 s) para que la animación se vea siempre.
+      const img = card.querySelector(".card__img img");
+      const lista = img && !img.complete
+        ? Promise.race([img.decode().catch(() => {}), new Promise((r) => setTimeout(r, 1500))])
+        : Promise.resolve();
+      lista.then(() => {
+        requestAnimationFrame(() => card.classList.add("card--visible"));
+        // Al terminar se saca el retraso para que el toque y el hover respondan al instante.
+        setTimeout(() => card.classList.remove("card--revela"), 1800);
+      });
     });
   }, { rootMargin: "0px 0px -6% 0px", threshold: 0.12 }) : null;
 
@@ -172,6 +171,9 @@
     const columnas = getComputedStyle(cont).gridTemplateColumns.split(" ").length || 1;
     [...cont.children].forEach((card, i) => {
       card.classList.add("card--revela");
+      // Las fotos de tarjetas que van a animarse se piden enseguida.
+      const img = card.querySelector(".card__img img");
+      if (img) img.loading = "eager";
       card.style.setProperty("--retraso", `${(i % columnas) * 90}ms`);
       observador.observe(card);
     });

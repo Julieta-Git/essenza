@@ -3,7 +3,7 @@
  * ------------------------------------------------------------
  * Este archivo es la ÚNICA fuente de datos del sitio.
  * Para cambiar los perfumes del mes, editá el array CATALOGO
- * (y la fecha de CONFIG.preciosActualizados). No hace falta tocar
+ * No hace falta tocar
  * el HTML.
  *
  * Forma de cada perfume:
@@ -43,8 +43,6 @@ const CONFIG = {
   instagram: "https://www.instagram.com/essenza.perfumes21",
   direccion: "Paraguay 2049, Formosa",
   horario: "De 8 a 20 h",
-  // Fecha que se muestra arriba del catálogo. Actualizala cada vez que cambies precios.
-  preciosActualizados: "13/10/2026",
 };
 
 /**

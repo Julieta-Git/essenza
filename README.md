@@ -9,9 +9,8 @@ Landing con catálogo de perfumes organizada por **familia olfativa** (propuesta
 ## Cómo actualizar los perfumes del mes
 1. Abrí `products.js`.
 2. Editá, agregá o borrá objetos en `CATALOGO` (la forma de cada uno está explicada arriba del archivo).
-3. Si cambiaste precios, actualizá `CONFIG.preciosActualizados` (por ejemplo `"15/11/2026"`).
-4. Subí las fotos nuevas a `assets/perfumes/` (preferentemente .webp, vertical 4:5, unos 800 px de ancho).
-5. Commit y push: Netlify publica solo.
+3. Subí las fotos nuevas a `assets/perfumes/` (preferentemente .webp, vertical 4:5, unos 800 px de ancho).
+4. Commit y push: GitHub Pages publica solo.
 
 Las familias que no tengan perfumes cargados no se muestran, así que no hace falta borrarlas.
 

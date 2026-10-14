@@ -40,7 +40,6 @@
         <a href="#preguntas">Preguntas</a>
         <a href="#ubicacion">Ubicación</a>
       </nav>
-      <a class="btn btn--small js-wa" data-msg="Hola, quiero hacer una consulta." href="#" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </header>
 
@@ -100,21 +99,12 @@
     <section class="section" id="catalogo" aria-labelledby="catalogo-titulo">
       <div class="wrap">
         <h2 id="catalogo-titulo">Todos los perfumes</h2>
-        <p class="precios-fecha" id="precios-fecha" hidden></p>
+        <p class="precios-fecha">Precio en efectivo o transferencia. Consultá por cuotas.</p>
 
         <div class="filtros" role="group" aria-label="Filtrar perfumes">
-          <div class="filtros__grupo">
-            <span class="filtros__label" id="f-familia">Familia</span>
-            <div class="chips" id="filtro-familia" aria-labelledby="f-familia"></div>
-          </div>
-          <div class="filtros__grupo">
-            <span class="filtros__label" id="f-genero">Para</span>
-            <div class="chips" id="filtro-genero" aria-labelledby="f-genero"></div>
-          </div>
-          <div class="filtros__grupo">
-            <span class="filtros__label" id="f-temporada">Temporada</span>
-            <div class="chips" id="filtro-temporada" aria-labelledby="f-temporada"></div>
-          </div>
+          <label class="filtros__grupo"><span class="filtros__label">Familia</span><select class="filtro" id="filtro-familia"></select></label>
+          <label class="filtros__grupo"><span class="filtros__label">Para</span><select class="filtro" id="filtro-genero"></select></label>
+          <label class="filtros__grupo"><span class="filtros__label">Temporada</span><select class="filtro" id="filtro-temporada"></select></label>
         </div>
 
         <p class="resultado" id="resultado" aria-live="polite"></p>
@@ -190,9 +180,9 @@
 
   <footer class="footer">
     <div class="wrap footer__inner">
-      <img class="logo__img logo__img--small" src="assets/marca/logo-essenza.webp" alt="Essenza Perfume" width="880" height="467" loading="lazy">
-      <span>Perfumes árabes · Formosa</span>
-      <a class="js-ig" href="#" target="_blank" rel="noopener">Instagram</a>
+      <img class="footer__logo" src="assets/marca/logo-essenza.webp" alt="Essenza Perfume" width="880" height="467" loading="lazy">
+      <span>Perfumes árabes</span>
+      <span>Formosa</span>
     </div>
   </footer>
 
