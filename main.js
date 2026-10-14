@@ -471,6 +471,57 @@
     buscar();
   }
 
+
+  /* ---------- intro del logo ----------
+     El frasco entra por la izquierda, el nombre por la derecha, se juntan en el centro
+     y el logo se achica hasta su lugar en el encabezado. Toca o tecla para saltarla. */
+
+  function intro() {
+    const raiz = document.documentElement;
+    const capa = $("#intro");
+    if (!raiz.classList.contains("intro-on") || !capa.animate) { capa.remove(); return; }
+    const logo = capa.querySelector(".intro__logo");
+    const frasco = capa.querySelector(".intro__frasco");
+    const nombre = capa.querySelector(".intro__nombre");
+    const destino = $(".logo__img");
+    const suave = "cubic-bezier(.22, 1, .36, 1)";
+    let terminado = false;
+
+    const terminar = () => {
+      if (terminado) return;
+      terminado = true;
+      raiz.classList.remove("intro-on");
+      capa.remove();
+    };
+    capa.addEventListener("pointerdown", terminar);
+    window.addEventListener("keydown", terminar, { once: true });
+
+    const listas = Promise.all([frasco, nombre].map((img) => (img.decode ? img.decode() : Promise.resolve()).catch(() => {})));
+    listas.then(() => {
+      if (terminado) return;
+      const entra = (img, desde, demora) => img.animate(
+        [{ transform: `translateX(${desde}vw)`, opacity: 0 }, { transform: "translateX(0)", opacity: 1 }],
+        { duration: 900, delay: demora, easing: suave, fill: "forwards" }
+      ).finished;
+
+      Promise.all([entra(frasco, -60, 0), entra(nombre, 60, 350)])
+        .then(() => new Promise((r) => setTimeout(r, 450)))
+        .then(() => {
+          if (terminado) return;
+          const a = logo.getBoundingClientRect();
+          const b = destino.getBoundingClientRect();
+          const escala = b.width / a.width;
+          const viaje = { duration: 800, easing: "cubic-bezier(.65, 0, .35, 1)", fill: "forwards" };
+          capa.animate([{ backgroundColor: getComputedStyle(capa).backgroundColor }, { backgroundColor: "transparent" }], viaje);
+          return logo.animate(
+            [{ transform: "none" }, { transform: `translate(${b.left - a.left}px, ${b.top - a.top}px) scale(${escala})` }],
+            viaje
+          ).finished;
+        })
+        .then(terminar, terminar);
+    });
+  }
+
   /* ---------- inicio ---------- */
 
   $("#limpiar-filtros").addEventListener("click", () => {
@@ -487,4 +538,5 @@
   renderQuiz();
   renderDisenador();
   abrirDesdeLink();
+  intro();
 })();

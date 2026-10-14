@@ -25,9 +25,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/marca/logo-essenza.png">
-  <link rel="stylesheet" href="styles.css?v=20261014b">
+  <script>
+    /* Intro del logo: una vez por visita, sin movimiento reducido y no al abrir un link directo a un perfume. */
+    (function () {
+      try {
+        if (sessionStorage.getItem("essenza-intro") || location.hash.indexOf("#perfume/") === 0 || !matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+        sessionStorage.setItem("essenza-intro", "1");
+      } catch (e) { return; }
+      document.documentElement.classList.add("intro-on");
+      setTimeout(function () { document.documentElement.classList.remove("intro-on"); }, 6000); // por si algo falla
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20261014c">
 </head>
 <body>
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__logo">
+      <img class="intro__frasco" src="assets/marca/logo-frasco.webp" alt="" width="880" height="467">
+      <img class="intro__nombre" src="assets/marca/logo-nombre.webp" alt="" width="880" height="467">
+    </div>
+  </div>
   <a class="skip" href="#catalogo">Ir al catálogo</a>
 
   <header class="header">
@@ -194,7 +211,7 @@
     <div class="modal__inner" id="modal-contenido"></div>
   </dialog>
 
-  <script src="products.js?v=20261014b"></script>
-  <script src="main.js?v=20261014b"></script>
+  <script src="products.js?v=20261014c"></script>
+  <script src="main.js?v=20261014c"></script>
 </body>
 </html>
