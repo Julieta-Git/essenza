@@ -65,7 +65,8 @@ const FAMILIAS = [
 // Género, familia y temporada: PROPUESTOS a partir de las notas; confirmar con el cliente.
 // Badee Al Oud Sublime y Hawas Kobra: notas de Fragrantica (sin pirámide), foto de internet
 // pasada a fondo negro (14/10/2026).
-// Faltan: ml, duración, y notas/foto de Badee Al Oud Honor and Glory.
+// Badee Al Oud Honor and Glory: notas y foto pasadas por Julieta (14/10/2026).
+// Faltan: ml y duración de todos.
 const CATALOGO = [
   {
     id: 1,
@@ -325,18 +326,18 @@ const CATALOGO = [
     marca: "Lattafa",
     ml: null,
     precio: 48000,
-    genero: "",
-    familia: "",
-    notas: [],
-    notasSalida: [],
-    notasCorazon: [],
-    notasFondo: [],
-    temporada: "",
+    genero: "unisex",
+    familia: "dulce",
+    notas: ["Piña", "Crème brûlée", "Canela", "Benjuí", "Cúrcuma", "Pimienta negra", "Vainilla", "Sándalo", "Cachemira", "Musgo"],
+    notasSalida: ["Piña", "Crème brûlée"],
+    notasCorazon: ["Canela", "Benjuí", "Cúrcuma", "Pimienta negra"],
+    notasFondo: ["Vainilla", "Sándalo", "Cachemira", "Musgo"],
+    temporada: "invierno",
     duracion: "",
     tiraA: "",
     inspiradoEn: "",
     descripcion: "",
-    imagen: "",
+    imagen: "assets/perfumes/badee-al-oud-honor-and-glory.webp",
     destacado: false,
     disponible: true,
   },
