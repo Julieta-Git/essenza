@@ -255,13 +255,41 @@ a { text-underline-offset: .2em; }
 .modal__nota { font-size: .82rem; color: var(--text-soft); }
 @media (max-width: 480px) { .hero__lema { font-size: .6rem; letter-spacing: .16em; gap: .6rem; } .hero__lema span { max-width: 85%; } }
 
-/* Único momento animado: el divisor de la portada se dibuja desde el centro. */
+/* Portada: el divisor se dibuja desde el centro. */
 @media (prefers-reduced-motion: no-preference) {
   .divisor { animation: divisor-entra 1.4s cubic-bezier(.16, 1, .3, 1) .2s both; }
   .divisor span { animation: punto-entra .6s ease-out 1s both; }
 }
 @keyframes divisor-entra { from { transform: scaleX(.15); opacity: .2; } }
 @keyframes punto-entra { from { opacity: 0; } }
+
+/* Fotos de perfumes: aparecen al hacer scroll, la foto se asienta y pasa un brillo dorado,
+   como la luz sobre el frasco. En el celular, el toque achica apenas la foto. */
+.card__img { position: relative; overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .card__img img { transition: transform .8s cubic-bezier(.16, 1, .3, 1); }
+  .card--revela {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s ease-out var(--retraso, 0ms), transform 1s cubic-bezier(.16, 1, .3, 1) var(--retraso, 0ms), border-color .2s;
+  }
+  .card--revela .card__img img { transform: scale(1.1); transition: transform 1.5s cubic-bezier(.16, 1, .3, 1) var(--retraso, 0ms); }
+  .card--revela.card--visible { opacity: 1; transform: none; }
+  .card--revela.card--visible .card__img img { transform: none; }
+  .card__img::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(227, 189, 109, .22) 50%, transparent 65%);
+    transform: translateX(-100%);
+  }
+  .card--visible .card__img::after { animation: brillo 1.4s ease-in-out calc(var(--retraso, 0ms) + .3s) both; }
+  .card:active .card__img img { transform: scale(.96); transition-duration: .2s; }
+  @media (hover: hover) { .card:hover .card__img img { transform: scale(1.05); } }
+  .modal[open] { animation: ficha-entra .45s cubic-bezier(.16, 1, .3, 1); }
+  .modal[open] .modal__img { overflow: hidden; }
+  .modal[open] .modal__img img { animation: foto-asienta 1.3s cubic-bezier(.16, 1, .3, 1) both; }
+}
+@keyframes brillo { 0% { transform: translateX(-100%); opacity: 1; } 100% { transform: translateX(100%); opacity: 1; } }
+@keyframes ficha-entra { from { opacity: 0; transform: translateY(18px) scale(.98); } }
+@keyframes foto-asienta { from { transform: scale(1.12); } }
 
 /* Familias: lista de perfumes de cada una */
 .familia__perfumes { color: var(--text); font-size: .85rem; line-height: 1.5; margin-top: .4rem; opacity: .8; }

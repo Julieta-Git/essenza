@@ -146,6 +146,32 @@
     renderCatalogo();
   }
 
+  /* ---------- animación de las fotos ---------- */
+
+  // Las tarjetas aparecen al entrar en pantalla y la foto se asienta con un brillo dorado.
+  // Sin animación si la persona pidió movimiento reducido en su dispositivo.
+  const animar = window.matchMedia("(prefers-reduced-motion: no-preference)").matches && "IntersectionObserver" in window;
+  const observador = animar ? new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const card = e.target;
+      card.classList.add("card--visible");
+      observador.unobserve(card);
+      // Al terminar se saca el retraso para que el toque y el hover respondan al instante.
+      setTimeout(() => card.classList.remove("card--revela"), 1600);
+    });
+  }, { rootMargin: "0px 0px -6% 0px", threshold: 0.12 }) : null;
+
+  function animarCards(cont) {
+    if (!observador) return;
+    const columnas = getComputedStyle(cont).gridTemplateColumns.split(" ").length || 1;
+    [...cont.children].forEach((card, i) => {
+      card.classList.add("card--revela");
+      card.style.setProperty("--retraso", `${(i % columnas) * 90}ms`);
+      observador.observe(card);
+    });
+  }
+
   /* ---------- tarjetas ---------- */
 
   function crearCard(perfume) {
@@ -173,6 +199,7 @@
     const lista = CATALOGO.filter((p) => p.destacado && p.disponible !== false);
     $("#destacados").hidden = lista.length === 0;
     $("#destacados-lista").replaceChildren(...lista.map(crearCard));
+    animarCards($("#destacados-lista"));
   }
 
   function renderCatalogo() {
@@ -184,6 +211,7 @@
       .sort((a, b) => (a.disponible === false) - (b.disponible === false));
 
     $("#catalogo-lista").replaceChildren(...lista.map(crearCard));
+    animarCards($("#catalogo-lista"));
     $("#catalogo-vacio").hidden = lista.length > 0;
     $("#resultado").textContent = lista.length === 1 ? "1 perfume" : `${lista.length} perfumes`;
   }
