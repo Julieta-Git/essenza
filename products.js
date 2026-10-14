@@ -63,8 +63,9 @@ const FAMILIAS = [
 // Precios: confirmados por el cliente (13/10/2026).
 // Notas: tomadas de las fichas que pasó el cliente (14/10/2026).
 // Género, familia y temporada: PROPUESTOS a partir de las notas; confirmar con el cliente.
-// Faltan: ml, duración, y notas/fotos de Badee Al Oud Sublime, Hawas Kobra y
-// Badee Al Oud Honor and Glory; foto de Club de Nuit Untold.
+// Badee Al Oud Sublime y Hawas Kobra: notas de Fragrantica (sin pirámide), foto de internet
+// pasada a fondo negro (14/10/2026).
+// Faltan: ml, duración, y notas/foto de Badee Al Oud Honor and Glory.
 const CATALOGO = [
   {
     id: 1,
@@ -156,18 +157,18 @@ const CATALOGO = [
     marca: "Lattafa",
     ml: null,
     precio: 50000,
-    genero: "",
-    familia: "",
-    notas: [],
+    genero: "unisex",
+    familia: "dulce",
+    notas: ["Manzana", "Lichi", "Ciruela", "Musgo de roble", "Vainilla", "Rosa"],
     notasSalida: [],
     notasCorazon: [],
     notasFondo: [],
-    temporada: "",
+    temporada: "verano",
     duracion: "",
     tiraA: "",
     inspiradoEn: "",
     descripcion: "",
-    imagen: "",
+    imagen: "assets/perfumes/badee-al-oud-sublime.webp",
     destacado: false,
     disponible: true,
   },
@@ -198,18 +199,18 @@ const CATALOGO = [
     marca: "Rasasi",
     ml: null,
     precio: 55000,
-    genero: "",
-    familia: "",
-    notas: [],
+    genero: "hombre",
+    familia: "especiada",
+    notas: ["Flor de jengibre", "Almizcle", "Notas amaderadas", "Ámbar", "Canela", "Té"],
     notasSalida: [],
     notasCorazon: [],
     notasFondo: [],
-    temporada: "",
+    temporada: "verano",
     duracion: "",
     tiraA: "",
     inspiradoEn: "",
     descripcion: "",
-    imagen: "",
+    imagen: "assets/perfumes/hawas-kobra.webp",
     destacado: false,
     disponible: true,
   },
@@ -251,7 +252,7 @@ const CATALOGO = [
     tiraA: "",
     inspiradoEn: "",
     descripcion: "",
-    imagen: "",
+    imagen: "assets/perfumes/club-de-nuit-untold.webp",
     destacado: false,
     disponible: true,
   },

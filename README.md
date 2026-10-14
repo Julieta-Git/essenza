@@ -33,7 +33,7 @@ Abrí `index.html` en el navegador, o usá `npx serve .` para verlo como en el s
 **Pendiente del cliente**
 - Perfume de diseñador al que se parece cada uno (campo `inspiradoEn`), solo los que él confirme.
 - Una foto propia para la portada (frasco o local, fondo oscuro, vertical).
-- Notas y foto de Badee Al Oud Sublime, Hawas Kobra y Badee Al Oud Honor and Glory; foto de Club de Nuit Untold.
+- Notas y foto de Badee Al Oud Honor and Glory. Confirmar familia y temporada de Sublime y Kobra (notas tomadas de Fragrantica).
 - ml y duración de cada perfume, y cuáles van como destacados.
 - Confirmar género, familia y temporada de cada uno (los propuse a partir de las notas) y las marcas de Hawas (Rasasi) y Badee Al Oud (Lattafa).
 - Confirmar el nombre comercial ("Essenza Perfume" o "Perfumes") y qué días abre (dijo "de 8 a 20").
