@@ -293,3 +293,84 @@ a { text-underline-offset: .2em; }
 
 /* Familias: lista de perfumes de cada una */
 .familia__perfumes { color: var(--text); font-size: .85rem; line-height: 1.5; margin-top: .4rem; opacity: .8; }
+
+/* Portada: foto de frasco detrás del título, fundida con el fondo. */
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+.hero__foto {
+  position: absolute; z-index: -1; left: 50%; top: 50%;
+  height: 105%; width: auto; max-width: none; transform: translate(-50%, -50%);
+  opacity: .32; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 35%, transparent 75%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 35%, transparent 75%);
+}
+@media (min-width: 900px) {
+  .hero__foto { left: auto; right: -1%; transform: translateY(-50%); opacity: .45; height: 110%; }
+  .hero__inner { text-shadow: 0 2px 30px rgba(0, 0, 0, .6); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero__foto { animation: portada-asienta 2.4s cubic-bezier(.16, 1, .3, 1) both; }
+}
+@keyframes portada-asienta { from { opacity: 0; scale: 1.08; } }
+
+/* Encontrá tu perfume */
+.quiz { scroll-margin-top: 90px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1.25rem, 4vw, 2rem); }
+.quiz__progreso { display: flex; gap: .4rem; margin-bottom: 1rem; }
+.quiz__progreso span { flex: 1; height: 3px; border-radius: 3px; background: var(--line); transition: background .4s; }
+.quiz__progreso .hecho { background: var(--gold); }
+.quiz__paso { font-size: .8rem; color: var(--text-soft); letter-spacing: .06em; }
+.quiz__titulo { font-family: var(--font-display); font-size: clamp(1.6rem, 5vw, 2rem); font-weight: 600; margin: .2rem 0 1.2rem; }
+.quiz__opciones { display: grid; gap: .65rem; }
+@media (min-width: 560px) { .quiz__opciones { grid-template-columns: 1fr 1fr; } }
+.quiz__opcion {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; text-align: left;
+  min-height: 56px; padding: .85rem 1.1rem; font: inherit; color: var(--text); cursor: pointer;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+  transition: border-color .2s, background .2s, transform .15s;
+}
+.quiz__opcion span { font-weight: 500; }
+.quiz__opcion small { color: var(--text-soft); font-size: .82rem; }
+.quiz__opcion:hover, .quiz__opcion:focus-visible { border-color: var(--gold); }
+.quiz__opcion:active { transform: scale(.98); background: #1f1a12; }
+.quiz__volver { margin-top: 1rem; min-height: 44px; padding: 0 .25rem; font: inherit; font-size: .9rem; color: var(--text-soft); background: none; border: 0; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.quiz__motivo { color: var(--text-soft); margin: -.6rem 0 1.2rem; }
+.quiz__grid { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 640px) { .quiz__grid { grid-template-columns: repeat(3, 1fr); } }
+.quiz__acciones { justify-content: flex-start; margin-top: 1.4rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .quiz > * { animation: quiz-entra .45s cubic-bezier(.16, 1, .3, 1) both; }
+  .quiz > :nth-child(3) { animation-delay: .05s; } .quiz > :nth-child(4) { animation-delay: .1s; }
+}
+@keyframes quiz-entra { from { opacity: 0; transform: translateY(10px); } }
+
+/* Perfume de diseñador */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.buscador input {
+  width: 100%; min-height: 52px; padding: 0 1.1rem; margin-bottom: 1.5rem; font: inherit; font-size: 1rem;
+  color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+}
+.buscador input:focus { outline: none; border-color: var(--gold); }
+.buscador input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.vacio__texto { color: var(--text-soft); }
+
+/* Ficha: pirámide olfativa, duración y compartir */
+.piramide { margin: .2rem 0 .8rem; }
+.piramide__titulo { font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-soft); margin-bottom: .7rem; }
+.piramide__lista { list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
+.piramide__nivel { display: grid; grid-template-columns: 30px 1fr; gap: .85rem; align-items: start; }
+.piramide__nivel svg { width: 30px; height: 26px; margin-top: .15rem; }
+.piramide__nivel polygon { fill: #2e2820; }
+.piramide__nivel polygon.activa { fill: var(--gold); }
+.piramide__nombre { display: block; font-weight: 500; }
+.piramide__nombre small { color: var(--text-soft); font-weight: 400; font-size: .8rem; margin-left: .3rem; }
+.piramide__notas { display: block; color: var(--text); font-size: .93rem; }
+.duracion { display: flex; align-items: center; gap: .8rem; margin-bottom: .8rem; font-size: .93rem; }
+.duracion__label { color: var(--text-soft); width: 7rem; }
+.duracion__barra { display: inline-flex; gap: 4px; }
+.duracion__barra span { width: 26px; height: 6px; border-radius: 3px; background: var(--line); }
+.duracion__barra .llena { background: var(--gold); }
+.compartir {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px;
+  font: inherit; font-size: .92rem; color: var(--text-soft); background: none; border: 0; cursor: pointer;
+}
+.compartir:hover { color: var(--gold-strong); }
+.compartir__icono svg { width: 18px; height: 18px; display: block; }

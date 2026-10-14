@@ -46,16 +46,39 @@
 
   <main>
     <section class="hero" id="inicio">
+      <!-- Foto de portada: reemplazar por una foto propia del local cuando la pase el cliente. -->
+      <img class="hero__foto" src="assets/perfumes/asad-elixir.webp" alt="" aria-hidden="true" width="720" height="960" fetchpriority="low">
       <div class="wrap hero__inner">
         <h1 class="hero__titulo">¿Cuál es<br>tu <em>esencia</em>?</h1>
         <div class="divisor" aria-hidden="true"><span></span></div>
         <p class="hero__lead">Descubrí la fragancia que va con <strong>vos</strong>.</p>
         <p class="hero__lugar">Perfumes árabes en Formosa</p>
         <div class="hero__actions">
-          <a class="btn" href="#familias">Elegir por aroma</a>
+          <a class="btn" href="#encontra">Encontrá tu perfume</a>
           <a class="btn btn--ghost" href="#catalogo">Ver todos</a>
         </div>
         <p class="hero__lema"><span>Encontrá la esencia que te representa</span></p>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="encontra" aria-labelledby="encontra-titulo">
+      <div class="wrap wrap--narrow">
+        <h2 id="encontra-titulo">Encontrá tu perfume</h2>
+        <p class="section__lead">Respondé tres preguntas y te recomendamos los que mejor van con vos.</p>
+        <div class="quiz" id="quiz" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section" id="disenador" aria-labelledby="disenador-titulo" hidden>
+      <div class="wrap wrap--narrow">
+        <h2 id="disenador-titulo">¿Usás un perfume de diseñador?</h2>
+        <p class="section__lead">Escribí cuál y te mostramos el perfume árabe que se le parece.</p>
+        <label class="buscador">
+          <span class="visually-hidden">Perfume de diseñador</span>
+          <input type="search" id="disenador-buscar" placeholder="Por ejemplo, el nombre de tu perfume" autocomplete="off">
+        </label>
+        <div class="grid" id="disenador-lista"></div>
+        <p class="vacio__texto" id="disenador-vacio" hidden>No lo tenemos en la lista. Escribinos por WhatsApp y te recomendamos uno parecido.</p>
       </div>
     </section>
 

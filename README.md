@@ -25,7 +25,15 @@ Abrí `index.html` en el navegador, o usá `npx serve .` para verlo como en el s
 - Datos confirmados por el cliente: WhatsApp, Instagram, dirección, horario, medios de pago, envíos solo en Formosa, los 15 precios (13/10/2026).
 - Pasada de calidad (impeccable): accesibilidad (botones de 44 px, cierre con ícono y etiqueta), tipografía Jost, filtros en filas en compu, familias con los nombres de sus perfumes, datos para Google (JSON-LD de comercio) y aviso si el navegador no tiene JavaScript.
 
+- Encontrá tu perfume: 3 preguntas (para quién, cuándo lo usa, qué aroma) que recomiendan hasta 3 perfumes en stock y arman el mensaje de WhatsApp.
+- Link propio por perfume (`#perfume/asad-bourbon`) que abre su ficha, y botón Compartir (en el celular abre el menú de compartir; en la compu copia el link).
+- Foto de frasco en la portada (por ahora la de Asad Elixir, hasta tener una foto propia del local).
+- Buscador "¿Usás un perfume de diseñador?": aparece solo cuando algún perfume tiene `inspiradoEn` cargado.
+- Ficha con pirámide olfativa (salida, corazón, fondo) y barra de duración, que aparece cuando se carga `duracion`.
+
 **Pendiente del cliente**
+- Perfume de diseñador al que se parece cada uno (campo `inspiradoEn`), solo los que él confirme.
+- Una foto propia para la portada (frasco o local, fondo oscuro, vertical).
 - Notas y foto de Badee Al Oud Sublime, Hawas Kobra y Badee Al Oud Honor and Glory; foto de Club de Nuit Untold.
 - ml y duración de cada perfume, y cuáles van como destacados.
 - Confirmar género, familia y temporada de cada uno (los propuse a partir de las notas) y las marcas de Hawas (Rasasi) y Badee Al Oud (Lattafa).
@@ -34,5 +42,6 @@ Abrí `index.html` en el navegador, o usá `npx serve .` para verlo como en el s
 - Revisar las descripciones de las familias y las respuestas de las preguntas frecuentes.
 
 **Pendiente técnico**
+- Con dominio: poner la URL completa en `og:image` para que WhatsApp muestre la vista previa. La vista previa es la misma para todo el sitio; una imagen distinta por perfume necesitaría una página por perfume.
 - Crear el sitio en Netlify y conectar el dominio cuando lo registre.
 - Probar en un celular Android real.
