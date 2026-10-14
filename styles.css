@@ -14,7 +14,7 @@
   --danger: #d98b7a;
   --radius: 14px;
   --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
   --wrap: 1120px;
 }
 
@@ -49,7 +49,12 @@ p { margin: 0 0 1rem; }
 .wrap { width: min(100% - 32px, var(--wrap)); margin-inline: auto; }
 .wrap--narrow { max-width: 760px; }
 
-.eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .18em; font-size: .75rem; font-weight: 600; margin-bottom: .75rem; }
+.hero__lugar { color: var(--text-soft); font-size: .95rem; letter-spacing: .04em; margin: -1.25rem 0 2rem; }
+
+/* Superficies del navegador con la paleta de la marca */
+::selection { background: var(--gold); color: #17120b; }
+html { scrollbar-color: #3a3226 var(--bg); accent-color: var(--gold); caret-color: var(--gold); }
+a { text-underline-offset: .2em; }
 
 /* Botones */
 .btn {
@@ -63,7 +68,7 @@ p { margin: 0 0 1rem; }
 .btn:hover { background: var(--gold-strong); border-color: var(--gold-strong); }
 .btn--ghost { background: transparent; color: var(--text); border-color: var(--line); }
 .btn--ghost:hover { background: transparent; border-color: var(--gold); color: var(--gold-strong); }
-.btn--small { min-height: 38px; padding: .5rem 1rem; font-size: .85rem; }
+.btn--small { min-height: 44px; padding: .5rem 1.1rem; font-size: .9rem; }
 .btn[disabled] { opacity: .45; cursor: not-allowed; }
 
 /* Header */
@@ -71,11 +76,7 @@ p { margin: 0 0 1rem; }
 .header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 64px; }
 .logo { display: inline-flex; align-items: center; gap: .65rem; text-decoration: none; color: var(--text); }
 .logo__img { height: 42px; width: auto; }
-.logo__icono { width: 22px; height: 30px; color: #fff; flex: none; }
-.logo__texto { display: grid; justify-items: center; line-height: 1; }
-.logo__nombre { font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; letter-spacing: .32em; margin-right: -.32em; text-transform: uppercase; color: #fff; }
-.logo__sub { font-size: .58rem; font-weight: 500; letter-spacing: .42em; margin-right: -.42em; text-transform: uppercase; color: var(--gold); margin-top: .3rem; }
-.logo--small .logo__nombre { font-size: 1.2rem; }
+.logo__img--small { height: 34px; opacity: .85; }
 .nav { display: none; gap: 1.6rem; font-size: .9rem; }
 .nav a { color: var(--text-soft); text-decoration: none; }
 .nav a:hover { color: var(--text); }
@@ -129,7 +130,7 @@ p { margin: 0 0 1rem; }
 .filtros__label { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-soft); }
 .chips { display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .25rem; scrollbar-width: thin; }
 .chip {
-  flex: none; min-height: 38px; padding: .45rem 1rem;
+  flex: none; min-height: 44px; padding: .45rem 1.05rem;
   background: transparent; color: var(--text-soft);
   border: 1px solid var(--line); border-radius: 999px;
   font: 500 .88rem/1 var(--font-body); cursor: pointer;
@@ -137,7 +138,10 @@ p { margin: 0 0 1rem; }
 }
 .chip:hover { color: var(--text); border-color: var(--gold); }
 .chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: #17120b; }
-@media (min-width: 860px) { .filtros { grid-template-columns: auto auto auto; justify-content: start; column-gap: 2.5rem; } .chips { flex-wrap: wrap; } }
+@media (min-width: 860px) {
+  .filtros__grupo { grid-template-columns: 7.5rem 1fr; align-items: center; }
+  .chips { flex-wrap: wrap; }
+}
 
 .resultado { color: var(--text-soft); font-size: .88rem; margin-bottom: 1rem; }
 
@@ -194,8 +198,12 @@ p { margin: 0 0 1rem; }
 .faq details { border-bottom: 1px solid var(--line); }
 .faq summary { cursor: pointer; list-style: none; padding: 1.15rem 2rem 1.15rem 0; position: relative; font-weight: 500; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; position: absolute; right: .25rem; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 1.4rem; }
-.faq details[open] summary::after { content: "−"; }
+.faq summary::after {
+  content: ""; position: absolute; right: .35rem; top: 50%; width: 10px; height: 10px; margin-top: -7px;
+  border-right: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold);
+  transform: rotate(45deg); transition: transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+.faq details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
 .faq details p { color: var(--text-soft); padding-bottom: 1.1rem; margin: 0; }
 
 /* Ubicación */
@@ -237,11 +245,23 @@ p { margin: 0 0 1rem; }
   position: absolute; top: .6rem; right: .6rem; z-index: 2;
   width: 40px; height: 40px; border-radius: 50%;
   background: rgba(14, 12, 10, .85); color: var(--text); border: 1px solid var(--line);
-  font-size: 1.3rem; cursor: pointer;
+  display: grid; place-items: center; cursor: pointer;
 }
+.modal__cerrar svg { width: 16px; height: 16px; }
 .ficha { list-style: none; padding: 0; margin: .5rem 0 1rem; display: grid; gap: .55rem; }
 .ficha li { display: grid; grid-template-columns: 7rem 1fr; gap: .75rem; font-size: .93rem; }
 .ficha li span:first-child { color: var(--text-soft); }
 .modal__precio { font-size: 1.5rem; font-weight: 600; color: var(--gold-strong); }
 .modal__nota { font-size: .82rem; color: var(--text-soft); }
 @media (max-width: 480px) { .hero__lema { font-size: .6rem; letter-spacing: .16em; gap: .6rem; } .hero__lema span { max-width: 85%; } }
+
+/* Único momento animado: el divisor de la portada se dibuja desde el centro. */
+@media (prefers-reduced-motion: no-preference) {
+  .divisor { animation: divisor-entra 1.4s cubic-bezier(.16, 1, .3, 1) .2s both; }
+  .divisor span { animation: punto-entra .6s ease-out 1s both; }
+}
+@keyframes divisor-entra { from { transform: scaleX(.15); opacity: .2; } }
+@keyframes punto-entra { from { opacity: 0; } }
+
+/* Familias: lista de perfumes de cada una */
+.familia__perfumes { color: var(--text); font-size: .85rem; line-height: 1.5; margin-top: .4rem; opacity: .8; }

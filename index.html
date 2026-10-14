@@ -9,9 +9,21 @@
   <meta property="og:title" content="Essenza · Perfumes árabes en Formosa">
   <meta property="og:description" content="Elegí tu perfume por familia olfativa y consultá por WhatsApp.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/marca/logo-essenza.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Essenza",
+    "description": "Perfumes árabes en Formosa.",
+    "telephone": "+5493704593841",
+    "address": { "@type": "PostalAddress", "streetAddress": "Paraguay 2049", "addressLocality": "Formosa", "addressCountry": "AR" },
+    "sameAs": ["https://www.instagram.com/essenza.perfumes21"]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/marca/logo-essenza.png">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -35,10 +47,10 @@
   <main>
     <section class="hero" id="inicio">
       <div class="wrap hero__inner">
-        <p class="eyebrow">Perfumes árabes · Formosa</p>
         <h1 class="hero__titulo">¿Cuál es<br>tu <em>esencia</em>?</h1>
         <div class="divisor" aria-hidden="true"><span></span></div>
         <p class="hero__lead">Descubrí la fragancia que va con <strong>vos</strong>.</p>
+        <p class="hero__lugar">Perfumes árabes en Formosa</p>
         <div class="hero__actions">
           <a class="btn" href="#familias">Elegir por aroma</a>
           <a class="btn btn--ghost" href="#catalogo">Ver todos</a>
@@ -49,7 +61,6 @@
 
     <section class="section" id="familias" aria-labelledby="familias-titulo">
       <div class="wrap">
-        <p class="eyebrow">Paso 1</p>
         <h2 id="familias-titulo">¿Qué aroma te gusta?</h2>
         <p class="section__lead">Cada familia agrupa perfumes con un carácter parecido. Tocá una para ver sus perfumes.</p>
         <div class="familias" id="familias-lista"></div>
@@ -58,7 +69,6 @@
 
     <section class="section section--alt" id="destacados" aria-labelledby="destacados-titulo" hidden>
       <div class="wrap">
-        <p class="eyebrow">Selección del mes</p>
         <h2 id="destacados-titulo">Destacados de la temporada</h2>
         <div class="grid" id="destacados-lista"></div>
       </div>
@@ -66,7 +76,6 @@
 
     <section class="section" id="catalogo" aria-labelledby="catalogo-titulo">
       <div class="wrap">
-        <p class="eyebrow">Catálogo</p>
         <h2 id="catalogo-titulo">Todos los perfumes</h2>
         <p class="precios-fecha" id="precios-fecha" hidden></p>
 
@@ -87,6 +96,7 @@
 
         <p class="resultado" id="resultado" aria-live="polite"></p>
         <div class="grid" id="catalogo-lista"></div>
+        <noscript><p class="vacio">Para ver el catálogo activá JavaScript, o escribinos por <a href="https://wa.me/5493704593841">WhatsApp</a>.</p></noscript>
         <div class="vacio" id="catalogo-vacio" hidden>
           <p>No hay perfumes con esos filtros.</p>
           <button class="btn btn--ghost" type="button" id="limpiar-filtros">Ver todos</button>
@@ -96,7 +106,6 @@
 
     <section class="section section--alt" id="comprar" aria-labelledby="comprar-titulo">
       <div class="wrap">
-        <p class="eyebrow">Fácil y rápido</p>
         <h2 id="comprar-titulo">Cómo comprar</h2>
         <ol class="pasos">
           <li><strong>Elegí tu perfume</strong><span>Filtrá por familia, género o temporada.</span></li>
@@ -109,7 +118,6 @@
 
     <section class="section" id="preguntas" aria-labelledby="preguntas-titulo">
       <div class="wrap wrap--narrow">
-        <p class="eyebrow">Dudas comunes</p>
         <h2 id="preguntas-titulo">Preguntas frecuentes</h2>
         <div class="faq">
           <details>
@@ -139,7 +147,6 @@
     <section class="section section--alt" id="ubicacion" aria-labelledby="ubicacion-titulo">
       <div class="wrap ubicacion">
         <div>
-          <p class="eyebrow">Visitanos</p>
           <h2 id="ubicacion-titulo">Ubicación y horarios</h2>
           <ul class="datos">
             <li><span>Dirección</span><span class="js-direccion"></span></li>
@@ -160,7 +167,7 @@
 
   <footer class="footer">
     <div class="wrap footer__inner">
-      <span class="logo logo--small"><span class="logo__texto"><span class="logo__nombre">Essenza</span><span class="logo__sub">Perfumes</span></span></span>
+      <img class="logo__img logo__img--small" src="assets/marca/logo-essenza.webp" alt="Essenza Perfume" width="880" height="467" loading="lazy">
       <span>Perfumes árabes · Formosa</span>
       <a class="js-ig" href="#" target="_blank" rel="noopener">Instagram</a>
     </div>

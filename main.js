@@ -103,13 +103,15 @@
     document.querySelectorAll('a[href="#familias"]').forEach((a) => { a.hidden = sinFamilias; });
     cont.replaceChildren(
       ...familiasConStock().map((f) => {
-        const cant = CATALOGO.filter((p) => p.familia === f.slug).length;
+        const perfumes = CATALOGO.filter((p) => p.familia === f.slug);
+        const cant = perfumes.length;
         return el("button", {
           class: "familia", type: "button",
           onclick: () => { setFiltro("familia", f.slug); $("#catalogo").scrollIntoView(); },
         }, [
           el("span", { class: "familia__nombre", text: f.nombre }),
           el("span", { class: "familia__desc", text: f.descripcion }),
+          el("span", { class: "familia__perfumes", text: perfumes.map((p) => p.nombre).join(" · ") }),
           el("span", { class: "familia__cant", text: cant === 1 ? "1 perfume" : `${cant} perfumes` }),
         ]);
       })
@@ -190,6 +192,12 @@
 
   const modal = $("#modal");
 
+  function cerrarBoton() {
+    const b = el("button", { class: "modal__cerrar", type: "button", "aria-label": "Cerrar ficha", onclick: () => modal.close() });
+    b.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    return b;
+  }
+
   function filaFicha(etiqueta, valor) {
     return el("li", {}, [el("span", { text: etiqueta }), el("span", { text: valor })]);
   }
@@ -217,7 +225,7 @@
       : el("a", { class: "btn", href: urlWhatsapp(mensajeConsulta(perfume)), target: "_blank", rel: "noopener" }, document.createTextNode("Consultar por WhatsApp"));
 
     $("#modal-contenido").replaceChildren(
-      el("button", { class: "modal__cerrar", type: "button", "aria-label": "Cerrar", onclick: () => modal.close() }, document.createTextNode("×")),
+      cerrarBoton(),
       nodoImagen(perfume, "modal__img"),
       el("div", { class: "modal__body" }, [
         perfume.marca ? el("span", { class: "card__marca", text: perfume.marca }) : null,
