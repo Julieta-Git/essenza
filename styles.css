@@ -213,9 +213,9 @@ a { text-underline-offset: .2em; }
 .mapa { width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--line); border-radius: var(--radius); filter: grayscale(.6) invert(.9) hue-rotate(180deg) contrast(.9); }
 
 /* Footer */
-.footer { padding: 2.5rem 0 6.5rem; border-top: 1px solid var(--line); color: var(--text-soft); font-size: .88rem; }
-.footer__inner { display: flex; flex-direction: column; align-items: center; gap: .3rem; text-align: center; letter-spacing: .06em; }
-.footer__logo { height: 64px; width: auto; margin-bottom: .6rem; }
+.footer { padding: 1.25rem 0 1.5rem; border-top: 1px solid var(--line); color: var(--text-soft); font-size: .88rem; }
+.footer__inner { display: flex; flex-direction: column; align-items: center; gap: 0; text-align: center; letter-spacing: .06em; font-size: .78rem; line-height: 1.5; }
+.footer__logo { height: 36px; width: auto; margin-bottom: .35rem; }
 
 /* WhatsApp flotante */
 .wa-flotante {
